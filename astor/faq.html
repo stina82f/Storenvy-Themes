@@ -1,0 +1,15 @@
+<div class="container">
+  <div class="row">
+    <div class="seven columns centered">
+      <div class="subpage">
+        <h1 class="page-title"><span>{{page.name}}</span></h1>
+
+        {% for faq in faqs.all %}
+          <h2>{{faq.question}}</h2>
+          {{ faq.answer | paragraphs: 'answer' }}
+        {% endfor %}
+
+      </div>
+    </div>
+  </div>
+</div>

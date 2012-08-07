@@ -1,0 +1,8 @@
+<div class="page">
+  <h1>{{page.name}}</h1>
+
+  {% for faq in faqs.all %}
+    <h2>{{faq.question}}</h2>
+    {{ faq.answer | paragraphs: 'answer' }}
+  {% endfor %}
+</div>

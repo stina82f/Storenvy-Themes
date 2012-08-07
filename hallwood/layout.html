@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html lang="en" class="ie ie6"><![endif]-->
+<!--[if IE 7 ]><html lang="en" class="ie ie7"><![endif]-->
+<!--[if IE 8 ]><html lang="en" class="ie ie8"><![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--> <html lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>{{ store.name }} | {{ page.name }}</title>
+
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="http://www.liftmediabox.com/storenvy/hallwood/css/styles.css?v=15">
+  <script src="http://www.liftmediabox.com/storenvy/hallwood/js/foundation/modernizr.foundation.js"></script>
+  <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+    <meta name="image:logo image" />
+    <meta name="if:show avatar" />
+
+    <meta name="if:header" />
+    <meta name="image:header image" />
+    <meta name="text:header link" />
+
+    <meta name="image:main background image" />
+    <meta name="image:side background image" />
+
+    <meta name="color:primary color" content="#d98908" />
+    <meta name="color:background" content="#f9f9f9" />
+    <meta name="color:page_background" content="#fff" />
+    <meta name="color:store name" content="#111" />
+    <meta name="color:header text color" content="#fff" />
+    <meta name="color:side background" content="#231f20" />
+    <meta name="color:footer background" content="#111" />
+    <meta name="color:navigation links" content="#fff" />
+    <meta name="color:navigation links hover" content="#ddd" />
+    <meta name="color:headers" content="#666" />
+    <meta name="color:text" content="#888" />
+    <meta name="color:links" content="#d98908" />
+    <meta name="color:links hover" content="#222" />
+
+    <style>
+body {
+    background: {{ theme.background }};
+    color: {{ theme.text }};
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: {{ theme.headers }};
+}
+
+a {
+    color: {{ theme.links }};
+}
+
+a:hover {
+    color: {{ theme.links_hover }};
+}
+
+.logo a {
+    color: {{ theme.store_name }};
+}
+
+.logo a:hover {
+    color: {{ theme.store_name }};
+}
+
+.l-header {
+  {% if theme.side_background_image %}
+    background: url("{{ theme.side_background_image }}") top left {{ theme.side_background }};
+  {% else %}
+    background: {{ theme.side_background }};
+  {% endif %}
+}
+
+.l-header h2 {
+    color: {{ theme.header_text_color }};
+}
+
+.l-header h2 span:after,
+.l-header h2 span:before{
+    background: {{ theme.header_text_color }};
+}
+
+.l-content {
+  {% if theme.main_background_image %}
+    background: url("{{ theme.main_background_image }}") top left {{ theme.background }};
+  {% else %}
+    background: {{ theme.background }};
+  {% endif %}
+}
+
+.l-footer {
+    background: {{ theme.footer_background }};
+}
+
+.nav-main > ul > li > a {
+    color: {{ theme.navigation_links }};
+}
+
+.nav-main > ul > li > a:hover {
+    color: {{ theme.navigation_links_hover }};
+}
+
+.productlist-price,
+.btn,
+.stockbar-stock {
+  background: {{ theme.primary_color }};
+}
+
+.product,
+.productlist,
+.page,
+.page-title {
+  background: {{ theme.page_background }};
+}
+
+{% if store.css %}
+  {{ store.css }}
+{% endif %}
+    </style>
+
+</head>
+
+<body id="{{ page.permalink }}-page" class="{{ page.permalink }} {{ page.category }}" data-controller="{{ page.permalink }}">
+  <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+
+  <div class="l-window">
+    <header class="l-header">
+      <h1 class="logo"><a href="/">{% if theme.logo_image %}<img src="{{ theme.logo_image }}" alt="{{ store.name }}">{% else %}{{ store.name }}{% endif %}</a></h1>
+
+      {% if theme.show_avatar %}
+        <img src="{{ store.avatar_url }}" class="profile-image">
+      {% endif %}
+
+      <nav class="nav nav-main">
+        <ul>
+          {% for nav_item in collections.all %}
+            <li id="collection_{{nav_item.id}}_link" {% if nav_item == collection %}class="active"{% endif %}>
+              <a href="{{nav_item.url}}">{{ nav_item.name }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+
+        <div class="profile-info">
+          <p>{{ store.description }}</p>
+        </div>
+
+        <ul>
+          {% for page in pages.all %}
+            <li><a href="{{ page.url }}">{{ page.name }}</a></li>
+          {% endfor %}
+        </ul>
+      </nav>
+    </header>
+
+    <div id="content" class="l-content">
+      {% if page.category == 'custom' %}
+        <div class="page">
+          <h1>{{page.name}}</h1>
+          {{ page_content }}
+        </div>
+      {% else %}
+        {{ page_content }}
+      {% endif %}
+    </div>
+
+    <footer class="l-footer">
+      <p class="footer">
+        {% for page in pages.all %}
+          <a href="{{ page.url }}">{{ page.name }} </a>
+        {% endfor %}
+        <a href="{{ store.profile_url }}">Store Profile</a>
+      </p>
+    </footer>
+  </div>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <script defer src="http://www.liftmediabox.com/storenvy/hallwood/js/log.js"></script>
+
+  <script>if ( typeof window.JSON === 'undefined' ) { document.write('<script src="http://www.liftmediabox.com/storenvy/hallwood/js/history/json2.js"><\/script>'); }</script>
+  <script src="http://www.liftmediabox.com/storenvy/hallwood/js/history/amplify.store.js"></script>
+  <script src="http://www.liftmediabox.com/storenvy/hallwood/js/history/history.adapter.jquery.js"></script>
+  <script src="http://www.liftmediabox.com/storenvy/hallwood/js/history/history.js"></script>
+  <script src="http://www.liftmediabox.com/storenvy/hallwood/js/history/history.html4.js"></script>
+  <script src="http://www.liftmediabox.com/storenvy/hallwood/js/plugins/jquery.cycle.js"></script>
+  <script defer src="http://www.liftmediabox.com/storenvy/hallwood/js/script.js?v=3"></script>
+
+  {% if store.js %}
+    <script>
+      {{ store.js }}
+    </script>
+  {% endif %}
+</body>
+</html>

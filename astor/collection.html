@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="row">
+    <div class="twelve columns">
+      <h1 class="page-title"><span>{{page.name}}</span></h1>
+      {% if products.current != empty %}
+        <ul class="block-grid three-up">
+          {% for product in products.current %}
+            <li>
+              <a href="{{ product.url }}" class="product product-list">
+                <div class="product-image">
+                  {% for photo in product.photos limit:1 %}
+                    <img src="{{ photo | product_photo_size: "large" }}" alt="{{ photo.alt }}" width="{{ photo | photo_dimension: "width", "large" }}" height="{{ photo | photo_dimension: "height", "large"}}" />
+                  {% endfor %}
+                </div>
+                <div class="product-heading">
+                  <div class="product-center">
+                    <h1 class="product-title">{{ product.name }}</h1>
+                    <p class="product-price"><sup>$</sup>{{ product.price }}</p>
+                  </div>
+                </div>
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p>There are no products in this collection yet.  Please check back later.</p>
+      {% endif %}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html lang="en" class="ie ie6"><![endif]-->
+<!--[if IE 7 ]><html lang="en" class="ie ie7"><![endif]-->
+<!--[if IE 8 ]><html lang="en" class="ie ie8"><![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--> <html lang="en"><!--<![endif]-->
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>{{ store.name }} | {{ page.name }}</title>
+
+  <link href='http://fonts.googleapis.com/css?family=Dosis:300,500' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="http://www.liftmediabox.com/storenvy/astor/css/styles.css?v=40">
+
+  <script src="http://www.liftmediabox.com/storenvy/astor/js/foundation/modernizr.foundation.js"></script>
+  <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <meta name="image:logo image" />
+
+
+  <meta name="if:header" />
+  <meta name="image:header image" />
+  <meta name="text:header text" />
+  <meta name="text:header link" />
+
+  <meta name="color:primary color" content="#d98908" />
+  <meta name="color:background" content="#fff" />
+  <meta name="color:store name" content="#111" />
+  <meta name="color:header text color" content="#fff" />
+  <meta name="color:footer background" content="#111" />
+  <meta name="color:navigation background" content="#231f20" />
+  <meta name="color:navigation header" content="#888" />
+  <meta name="color:navigation links" content="#fff" />
+  <meta name="color:navigation links hover" content="#ddd" />
+  <meta name="color:headers" content="#111" />
+  <meta name="color:text" content="#231f20" />
+  <meta name="color:links" content="#111" />
+  <meta name="color:links hover" content="#222" />
+
+    <style>
+
+html {
+    background: {{ theme.footer_background }};
+}
+
+body {
+    background: {{ theme.background }};
+    color: {{ theme.text }};
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: {{ theme.headers }};
+}
+
+a {
+    color: {{ theme.links }};
+}
+
+a:hover {
+    color: {{ theme.links_hover }};
+}
+
+.branding a {
+    color: {{ theme.store_name }};
+}
+
+.branding a:hover {
+    color: {{ theme.store_name }};
+}
+
+.l-header h2 {
+    color: {{ theme.header_text_color }};
+}
+
+.l-header h2 span:after,
+.l-header h2 span:before{
+    background: {{ theme.header_text_color }};
+}
+
+.l-footer {
+    background: {{ theme.footer_background }};
+}
+
+.nav-side {
+    background: {{ theme.navigation_background }};
+}
+
+.nav-side h1 {
+    color: {{ theme.navigation_header }};
+    border-top-color: {{ theme.navigation_header }}
+}
+
+.nav-side > ul {
+    border-bottom-color: {{ theme.navigation_header }}
+}
+
+.nav-side > ul > li > a {
+    color: {{ theme.navigation_links }};
+}
+
+.nav-side > ul > li > a:hover {
+    color: {{ theme.navigation_links_hover }};
+}
+
+.btn,
+.stockbar-stock {
+  background: {{ theme.primary_color }};
+}
+
+{% if store.css %}
+  {{ store.css }}
+{% endif %}
+    </style>
+
+</head>
+
+<body id="{{ page.permalink }}-page" class="{{ page.permalink }} {{ page.category }}" data-controller="{{ page.permalink }}">
+
+  <header class="l-header">
+    <h1 class="branding"><a href="/">{% if theme.logo_image %}<img src="{{ theme.logo_image }}" alt="{{ store.name }}">{% else %}{{ store.name }}{% endif %}</a></h1>
+
+    {% if theme.header %}
+      <div class="banner-holder">
+      {% if theme.header_text %}<h2><span>{{ theme.header_text }}</span></h2>{% endif %}
+      {% if theme.header_link %}
+        <a href="{{ theme.header_link }}" class="banner">
+          <img src="{{ theme.header_image }}">
+        </a>
+        <img src="{{ theme.header_image }}" class="hidden">
+      {% else %}
+        <div class="banner">
+          <img src="{{ theme.header_image }}">
+        </div>
+        <img src="{{ theme.header_image }}" class="hidden">
+      {% endif %}
+      </div>
+    {% endif %}
+  </header>
+
+  <div class="l-content">
+
+    <nav class="nav nav-side">
+      <h1>Categories</h1>
+      <ul>
+        {% for nav_item in collections.all %}
+        <li id="collection_{{nav_item.id}}_link" {% if nav_item == collection %}class="active"{% endif %}>
+          <a href="{{nav_item.url}}">{{ nav_item.name }}</a>
+        </li>
+        {% endfor %}
+      </ul>
+    </nav>
+
+    {% if page.category == 'custom' %}
+        <div class="container">
+          <div class="row">
+            <div class="seven columns centered">
+              <div class="subpage">
+                <h1 class="page-title"><span>{{page.name}}</span></h1>
+
+                {{ page_content }}
+
+              </div>
+            </div>
+          </div>
+        </div>
+    {% else %}
+        {{ page_content }}
+    {% endif %}
+
+  </div>
+
+  <footer class="l-footer">
+    <div class="container">
+      <div class="row">
+        <div class="twelve columns">
+
+          <nav class="nav nav-footer">
+            <ul>
+              {% for page in pages.all %}
+                <li><a href="{{ page.url }}">{{ page.name }}</a></li>
+              {% endfor %}
+              <li><a href="{{ store.profile_url }}">Store Profile</a></li>
+            </ul>
+          </nav>
+
+          <p class="store-description">{{ store.description }}</p>
+          <p>Copyright 2012 {{ store.name }}</p>
+
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <script src="http://www.liftmediabox.com/storenvy/astor/js/log.js"></script>
+  <script src="http://www.liftmediabox.com/storenvy/astor/js/plugins/jquery.cycle.js"></script>
+  <script src="http://www.liftmediabox.com/storenvy/astor/js/script.js?v=8"></script>
+
+  {% if store.js %}
+    <script>
+      {{ store.js }}
+    </script>
+  {% endif %}
+</body>
+</html>

@@ -1,0 +1,83 @@
+<div class="l-content">
+  <div class="container">
+    <div class="row">
+
+      <div class="three columns">
+        <dl class="nice vertical tabs sidenav">
+          {% for nav_item in collections.all %}
+            <dd id="collection_{{nav_item.id}}_link" {% if nav_item == collection %}class="active"{% endif %}>
+              <a href="{{nav_item.url}}">{{ nav_item.name }}</a>
+            </dd>
+          {% endfor %}
+        </dl>
+      </div>
+
+      <div class="nine columns">
+        <div class="productdetails">
+          <div class="row">
+            <div class="six column">
+
+              <h1 class="productdetails-title">{{product.name}}</h1>
+              <p class="productdetails-price">${{ product.price }}</p>
+
+              <div class="productdetails-description">
+                <h2>Description</h2>
+                {{ product.description | auto_link | paragraphs }}
+              </div>
+
+              <ul class="stock">
+                {% for variant in product.variants %}
+                <li>
+                  <div class="stockbar">
+                    <p>{{ variant.name }}</p>
+                    <div class="stockbar-stock" style="width:{{variant.percent_available}}%;"></div>
+                  </div>
+
+                  {% if variant.quantity < 1 %}
+                    <a href="#" class="btn stockbar-btn disabled">Sold Out</a>
+                  {% else %}
+                    <form class="cart_add_form" action="javascript:void(window.top.location.hash = '#javascript:void()');" onsubmit="if (StorenvyCartComm) { StorenvyCartComm.addToCart({{variant.id}}, cartUrl); } return !1;">
+                      <input type="submit" class="btn stockbar-btn" value="Add To Cart">
+                    </form>
+                  {% endif %}
+                </li>
+                {% endfor %}
+              </ul>
+
+            </div>
+            <div class="six column">
+
+              <div class="productdetails-gallery-nav"></div>
+              <div class="productdetails-gallery">
+                {% for photo in product.photos %}
+                  <div class="productdetails-gallery-slide">
+                    <img src="{{ photo | product_photo_size: "large" }}" alt="{{ photo.alt }}" width="{{ photo | photo_dimension: "width", "large" }}" height="{{ photo | photo_dimension: "height", "large"}}" />
+                  </div>
+                {% endfor %}
+              </div>
+
+              {% if product.tags != blank %}
+                <div class="productdetails-description productdetails-description-tags">
+                  <h2>Tags</h2>
+                  <p>
+                    {% for tag in product.tags %}
+                      <a href="{{tag.storenvy_search_url}}" class="tag" title="Search Storenvy for {{tag.name}}.">{{ tag.name }}</a>
+                    {% endfor %}
+                  </p>
+                </div>
+              {% endif %}
+
+              <div class="productdetails-social">
+                <iframe allowtransparency="true" frameborder="0" scrolling="no" src="//platform.twitter.com/widgets/tweet_button.html?" style="width:120px; height:20px;"></iframe>
+                <div class="fb-like" data-send="false" data-layout="button_count" data-width="120" data-show-faces="false"></div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>

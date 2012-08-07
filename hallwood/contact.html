@@ -1,0 +1,42 @@
+<div class="page">
+  <h1>{{page.name}}</h1>
+
+  {% if contact.sent %}
+    <div id="request_received">
+      <h2>Thanks for getting in touch!</h2>
+      <p>We will respond as soon as possible.</p>
+      <p>Sincerely,<br/>{{ store.name }}</p>
+    </div>
+  {% else %}
+    <form id="contact-form" method="post" action ="/contact">
+      <div class="field">
+        <label for="name">Name <span>*</span></label>
+        {{ contact | contact_input: 'name'}}
+      </div>
+      <div class="field">
+        <label for="email">Email <span>*</span></label>
+        {{ contact | contact_input: 'email'}}
+      </div>
+      <div class="field">
+        <label for="phone">Phone</label>
+        {{ contact | contact_input: 'phone'}}
+      </div>
+      <div class="field">
+        <label for="order_number">Order Number</label>
+        {{ contact | contact_input: 'order_number'}}
+      </div>
+      <div class="field">
+        <label for="message">Your Message <span>*</span></label>
+        {{ contact | contact_input: 'message'}}
+        <p class="instruction"><em>Please provide all the information you possibly can.</em></p>
+      </div>
+      <div class="field">
+        <label for="captcha">Spam Protection (Captcha)</label>
+        {{ contact.captcha }}<br/>
+        {{ contact | contact_input: 'captcha' }}
+      </div>
+
+      <input type="submit" value="Submit"  class="btn btn-submit" />
+    </form>
+  {% endif %}
+</div>

@@ -1,0 +1,68 @@
+<div class="container product">
+
+  <h1 class="page-title"><span>{{product.name}}</span></h1>
+
+  <div class="row">
+
+    <div class="six columns push-six">
+
+      <p class="product-price"><sup>$</sup>{{ product.price }}</p>
+
+      <div class="product-details">
+        {{ product.description | auto_link | paragraphs }}
+      </div>
+
+      <div id="add_notice" style="display:none;"></div>
+
+      <ul class="stock">
+        {% for variant in product.variants %}
+        <li>
+          <div class="stockbar">
+            <p>{{ variant.name }}</p>
+            <div class="stockbar-stock" style="width:{{variant.percent_available}}%;"></div>
+          </div>
+
+          {% if variant.quantity < 1 %}
+            <a href="#" class="btn stockbar-btn disabled">Sold Out</a>
+          {% else %}
+            <form class="cart_add_form" action="javascript:void(window.top.location.hash = '#javascript:void()');" onsubmit="if (StorenvyCartComm) { StorenvyCartComm.addToCart({{variant.id}}, cartUrl); } return !1;">
+              <input type="submit" class="btn stockbar-btn" value="Add To Cart">
+            </form>
+          {% endif %}
+        </li>
+        {% endfor %}
+      </ul>
+
+      {% if product.tags != blank %}
+
+        <h6>Tags</h6>
+
+          <p class="tags">
+          {% for tag in product.tags %}
+            <a href="{{tag.storenvy_search_url}}" class="tag" title="Search Storenvy for {{tag.name}}.">{{ tag.name }}</a>
+          {% endfor %}
+          </p>
+
+      {% endif %}
+
+      <h6>Share This</h6>
+      <div class="share_product">
+        {{ product | facebook_like_button }} <!-- Facebook Like Button -->
+        {{ product | tweet_button }} <!-- Twitter Share Button -->
+      </div>
+
+    </div>
+
+    <div class="six columns pull-six">
+      <div class="product-gallery-nav"></div>
+      <div class="product-gallery">
+        {% for photo in product.photos %}
+          <div class="product-gallery-slide">
+            <img src="{{ photo | product_photo_size: "large" }}" alt="{{ photo.alt }}" width="{{ photo | photo_dimension: "width", "large" }}" height="{{ photo | photo_dimension: "height", "large"}}" />
+          </div>
+        {% endfor %}
+      </div>
+
+    </div>
+  </div>
+</div>

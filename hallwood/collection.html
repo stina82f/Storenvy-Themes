@@ -1,0 +1,29 @@
+<h1 class="page-title">{{page.name}}</h1>
+
+<div class="row">
+  <div class="twelve columns">
+
+    {% if products.current != empty %}
+      <ul class="block-grid three-up">
+        {% for product in products.current %}
+          <li>
+            <a href="{{ product.url }}" class="productlist">
+              <div class="productlist-image">
+                <img src="{{ product.image.large_url }}" alt="{{product.name | h}}" />
+              </div>
+              <div class="productlist-heading">
+                <div class="productlist-center">
+                  <h1 class="productlist-title">{{ product.name }}</h1>
+                  <p class="productlist-price">${{ product.price }}</p>
+                </div>
+              </div>
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>There are no products in this collection yet.  Please check back later.</p>
+    {% endif %}
+
+  </div>
+</div>

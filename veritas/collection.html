@@ -1,0 +1,41 @@
+<div class="l-content">
+  <div class="container">
+    <div class="row">
+
+      <div class="three columns">
+        <dl class="nice vertical tabs sidenav">
+          {% for nav_item in collections.all %}
+            <dd id="collection_{{nav_item.id}}_link">
+              <a href="{{nav_item.url}}" {% if nav_item == collection %}class="active"{% endif %}>{{ nav_item.name }}</a>
+            </dd>
+          {% endfor %}
+        </dl>
+      </div>
+
+      <div class="nine columns">
+        {% if products.current != empty %}
+          <ul class="block-grid three-up">
+            {% for product in products.current %}
+              <li class="block-grid-item">
+                <a href="{{ product.url }}" class="productlist">
+                  <div class="productlist-image">
+                    {% for photo in product.photos limit:1 %}
+                      <img src="{{ photo | product_photo_size: "large" }}" alt="{{ photo.alt }}" width="{{ photo | photo_dimension: "width", "large" }}" height="{{ photo | photo_dimension: "height", "large"}}" />
+                    {% endfor %}
+                  </div>
+                  <div class="productlist-heading">
+                    <h1 class="productlist-title"><span>{{ product.name }}</span></h1>
+                    <p class="productlist-price">${{ product.price }}</p>
+                  </div>
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <p>There are no products in this collection yet.  Please check back later.</p>
+        {% endif %}
+      </div>
+
+    </div>
+  </div>
+</div>
