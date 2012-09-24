@@ -1,18 +1,22 @@
 // Less Imports
-@import "modules/mixins.less";
+@import "modules/mixins";
 
 // Foundation
-@import "foundation/globals.css";
-@import "foundation/grid.css";
-@import "foundation/typography.css";
-@import "foundation/forms.css";
-@import "foundation/mobile.css";
-@import "foundation/ui.css";
-@import "foundation/ie.css";
+@import "foundation/globals";
+@import "foundation/grid";
+@import "foundation/typography";
+@import "foundation/forms";
+@import "foundation/mobile";
+@import "foundation/ui";
+@import "foundation/ie";
 
 // Js Required
-@import "foundation/orbit.css";
-@import "foundation/reveal.css";
+@import "foundation/orbit";
+@import "foundation/reveal";
+
+@screen-small: 479px;
+@screen-medium: 767px;
+@screen-large: 1279px;
 
 
 // Custom
@@ -235,8 +239,11 @@ h1, h2, h3, h4, h5, h6 {
           .opacity(80);
         }
 
-        @media (max-width: 767px) {
+        @media (max-width: @screen-medium) {
           font-size: 18px;
+        }
+        @media (max-width: @screen-small) {
+          padding: 5px 10px;
         }
       }
     }

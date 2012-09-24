@@ -15,7 +15,7 @@ SITE = {
         bannerResize();
       });
 
-      if($('.block-grid').length) {
+      if($('.block-grid').length && $(window).width() > 767 ) {
         $('.block-grid li').each(function(){
           $(this).find('img').load(function(){
             var height = $(this).height();
