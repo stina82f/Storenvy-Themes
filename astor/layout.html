@@ -19,7 +19,6 @@
 
   <meta name="image:logo image" />
 
-
   <meta name="if:header" />
   <meta name="image:header image" />
   <meta name="text:header text" />
@@ -28,7 +27,7 @@
   <meta name="color:primary color" content="#d98908" />
   <meta name="color:background" content="#fff" />
   <meta name="color:store name" content="#111" />
-  <meta name="color:header text color" content="#fff" />
+  <meta name="color:site header color" content="#fff" />
   <meta name="color:footer background" content="#111" />
   <meta name="color:navigation background" content="#231f20" />
   <meta name="color:navigation header" content="#888" />
@@ -71,12 +70,12 @@ a:hover {
 }
 
 .l-header h2 {
-    color: {{ theme.header_text_color }};
+    color: {{ theme.site_header_color }};
 }
 
 .l-header h2 span:after,
 .l-header h2 span:before{
-    background: {{ theme.header_text_color }};
+    background: {{ theme.site_header_color }};
 }
 
 .l-footer {
@@ -121,9 +120,10 @@ a:hover {
   <header class="l-header">
     <h1 class="branding"><a href="/">{% if theme.logo_image %}<img src="{{ theme.logo_image }}" alt="{{ store.name }}">{% else %}{{ store.name }}{% endif %}</a></h1>
 
-    {% if theme.header %}
+    {% if theme.header_text %}<h2 class="subtitle{% if page.permalink == 'home' %} subtitle-home{% endif %}"><span>{{ theme.header_text }}</span></h2>{% endif %}
+
+    {% if theme.header and page.permalink == 'home' %}
       <div class="banner-holder">
-      {% if theme.header_text %}<h2><span>{{ theme.header_text }}</span></h2>{% endif %}
       {% if theme.header_link %}
         <a href="{{ theme.header_link }}" class="banner">
           <img src="{{ theme.header_image }}">

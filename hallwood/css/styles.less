@@ -10,12 +10,14 @@
 @import "foundation/ui";
 @import "foundation/ie";
 
+@screen-small: 480px;
+@screen-medium: 767px;
 
 //Overrides
 .row { width: 100%; max-width: 100%; min-width: 100%; margin: 0 auto; }
 
 .block-grid.three-up > li {
-  @media (max-width: 767px) {
+  @media only screen and (max-width: @screen-medium) {
     width: 98%;
   }
 
@@ -71,12 +73,11 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  height: 30px;
-  padding: 5px 20px;
+  padding: 5px 0;
   background: #ffb68e;
 }
 
-@media (max-width: 480px) {
+@media only screen and (max-width: @screen-medium) {
   html,
   body {
     overflow: scroll;
@@ -113,6 +114,10 @@ body {
     color: #fff;
   }
 }
+input.btn {
+  -webkit-appearance: none;
+  .border-radius(0);
+}
 
 .header-image {
   margin: -50px -50px 50px;
@@ -121,7 +126,7 @@ body {
     width: 100%;
   }
 
-  @media (max-width: 480px) {
+  @media only screen and (max-width: @screen-small) {
     margin: -20px -20px 20px;
   }
 }
@@ -176,6 +181,24 @@ body {
       &.active {
         > a {
           color: #000;
+        }
+      }
+    }
+  }
+  
+  @media only screen and (max-width: @screen-medium) {
+    > ul {
+      margin: 0 auto 10px;
+      text-align: center;
+      > li {
+        display: inline-block;
+        margin: 0 2px;
+        white-space: nowrap;
+        &:before {
+          content: none;
+        }
+        > a {
+          padding: 3px;
         }
       }
     }
@@ -338,12 +361,19 @@ body {
   font-size: 18px;
   float: right;
   padding: 3px 0 0;
+  margin: 0 50px;
 
   a {
     padding: 0 7px;
     color: #888;
     display: inline-block;
     font-weight: 800;
+  }
+  
+  @media only screen and (max-width: @screen-medium) {
+    float: none;
+    text-align: center;
+    margin: 0 20px;
   }
 }
 
@@ -394,7 +424,7 @@ body {
 }
 
 .stockbar {
-  width: 69%;
+  width: 49%;
   margin-right: 1%;
   height: 50px;
   .box-sizing();
@@ -427,22 +457,29 @@ body {
 
 .stockbar-btn {
   float: left;
-  width: 30%;
+  width: 50%;
   text-align: center;
 }
 
 input.stockbar-btn {
   padding: 0;
   height: 50px;
+  -webkit-appearance: none;
+  .border-radius(0);
+  width: 50%;
 }
 
-a.stockbar-btn {
+a.stockbar-btn,
+span.stockbar-btn {
   padding: 16px 0;
   height: 18px;
 }
 
 form {
   margin-bottom: 0;
+  input, select, textarea {
+    max-width: 100%;
+  } 
 }
 
 .field {

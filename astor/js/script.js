@@ -8,7 +8,6 @@ function bannerResize(){
 SITE = {
   common: {
     init: function(){
-      if(window.console) window.console.log('common.init()');
 
       bannerResize();
       $(window).resize(function(){
@@ -27,21 +26,18 @@ SITE = {
   },
   home: {
     init: function(){
-      if(window.console) window.console.log('bodyClass.home()');
 
     }
   },
 
   collection: {
     init: function(){
-      if(window.console) window.console.log('bodyClass.home()');
 
     }
   },
 
   product: {
     init: function(){
-      if(window.console) window.console.log('bodyClass.home()');
 
       $('.product-gallery').cycle({
           fx:     'fade',

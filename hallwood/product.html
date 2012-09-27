@@ -19,7 +19,7 @@
           </div>
 
           {% if variant.quantity < 1 %}
-            <a href="#" class="btn stockbar-btn disabled">Sold Out</a>
+            <span class="btn stockbar-btn disabled">Sold Out</span>
           {% else %}
             <form class="cart_add_form" action="javascript:void(window.top.location.hash = '#javascript:void()');" onsubmit="if (StorenvyCartComm) { StorenvyCartComm.addToCart({{variant.id}}, cartUrl); } return !1;">
               <input type="submit" class="btn stockbar-btn" value="Add To Cart">

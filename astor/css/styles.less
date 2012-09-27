@@ -16,7 +16,8 @@
 
 @screen-small: 479px;
 @screen-medium: 767px;
-@screen-large: 1279px;
+@screen-large: 1023px;
+@screen-xlarge: 1279px;
 
 
 // Custom
@@ -39,54 +40,57 @@ h1, h2, h3, h4, h5, h6 {
   overflow: hidden;
   margin: 0 0 30px;
 
-  h2 {
-    margin: 0;
-    padding: 0;
-    z-index: 3;
-    position: absolute;
-    bottom: 30px;
-    text-align: center;
-    width: 100%;
-    color: #fff;
-    font-weight: 300;
+}
 
-    span {
-      position: relative;
-      display: inline-block;
+.subtitle {
+  margin: 15px 0 0;
+  padding: 0;
+  z-index: 3;
+  text-align: center;
+  width: 100%;
+  color: #000;
+  font-weight: 300; 
 
-      &:after,
-      &:before {
-        content: "";
-        width: 100px;
-        height: 1px;
-        display: block;
-        background: #fff;
-        position: absolute;
-        top: 50%;
-      }
+  span {
+    position: relative;
+    display: inline-block;
 
-      &:after {
-        right: -110px;
-      }
-
-      &:before {
-        left: -110px;
-      }
+    &:after,
+    &:before {
+      content: "";
+      width: 100px;
+      height: 1px;
+      display: block;
+      background: #000;
+      position: absolute;
+      top: 50%;
     }
+
+    &:after {
+      right: -110px;
+    }
+
+    &:before {
+      left: -110px;
+    }
+  }
+}
+.subtitle-home {
+  margin: 0;
+  position: absolute;
+  bottom: 40px;
+}
+@media (max-width: @screen-medium) {
+  .subtitle {
+    position: relative;
+    bottom: 0;
+    margin: 10px 0 30px;
   }
 }
 
 .l-content {
   position: relative;
   padding: 40px 0;
-}
-
-.banner-holder {
-  display: none;
-}
-
-.home .banner-holder {
-  display: block;
 }
 
 .banner {
@@ -126,6 +130,10 @@ h1, h2, h3, h4, h5, h6 {
   img {
     margin: -20px 0;
     display: block;
+  }
+  
+  @media (max-width: @screen-medium) {
+    margin-bottom: 20px;
   }
 }
 
@@ -188,13 +196,13 @@ h1, h2, h3, h4, h5, h6 {
     }
   }
 
-  @media (max-width: 767px) {
+  @media (max-width: @screen-large) {
     width: 100%;
     min-width: 100%;
     max-width: 100%;
     position: relative;
     top: auto;
-    margin-top: -95px;
+    margin-top: -55px;
     margin-bottom: 40px;
     text-align: center;
     .box-sizing();
@@ -218,6 +226,9 @@ h1, h2, h3, h4, h5, h6 {
       }
     }
   }
+}
+.home .nav-side {
+  margin-top: -95px;
 }
 
 .nav-footer {
@@ -509,6 +520,9 @@ h1, h2, h3, h4, h5, h6 {
   background: #ddd;
   position: relative;
   float: left;
+  @media (max-width: @screen-medium) {
+    width: 49%;
+  }
 
   p {
     position: absolute;
@@ -536,11 +550,19 @@ h1, h2, h3, h4, h5, h6 {
   float: left;
   width: 30%;
   text-align: center;
+  @media (max-width: @screen-medium) {
+    width: 50%;
+  }
 }
 
 input.stockbar-btn {
   padding: 0;
   height: 50px;
+  -webkit-appearance: none;
+  .border-radius(0);
+  @media (max-width: @screen-medium) {
+    width: 50%;
+  }
 }
 
 a.stockbar-btn {
