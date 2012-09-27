@@ -16,6 +16,9 @@
 @linkHoverColor: #000;
 @bodyBackground: #f6f6f6;
 
+@screen-small: 479px;
+@screen-medium: 767px;
+
 html {
   background: #222;
 }
@@ -54,11 +57,19 @@ a {
   padding: 25px 0;
   background: #fff;
   .box-shadow(0 1px rgba(0,0,0,0.1));
+  
+  @media only screen and (max-width: @screen-medium) {
+    position: static;
+  }
 }
 
 .l-content {
   margin-top: 90px;
   padding: 30px;
+  @media only screen and (max-width: @screen-medium) {
+    margin-top: 20px;
+    padding: 0;
+  }
 }
 
 .l-footer {
@@ -97,6 +108,10 @@ a {
     color: #fff;
   }
 }
+input.btn {
+  -webkit-appearance: none;
+  .border-radius(0);
+}
 
 .branding {
   float: left;
@@ -112,6 +127,11 @@ a {
       max-height: 100%;
     }
   }
+  
+  @media only screen and (max-width: @screen-medium) {
+    text-align: center;
+    float: none;
+  }
 }
 
 .nav-main {
@@ -123,6 +143,22 @@ a {
         padding: 15px 20px 10px;
         font-size: 18px;
         font-weight: 200;
+        white-space: nowrap;
+      }
+    }
+  }
+  
+  @media only screen and (max-width: @screen-medium) {
+    float: none;
+    > ul {
+      text-align: center;
+      margin-top: 10px;
+      > li {
+        display: inline;
+        float: none;
+        > a {
+          padding: 5px 10px;
+        }
       }
     }
   }
@@ -223,6 +259,15 @@ a {
     font-size: 24px;
     background: rgba(0,0,0,0.8);
     color: #fff;
+  }
+  @media only screen and (max-width: @screen-small) {
+    bottom: 0;
+    h1 {
+      font-size: 24px;
+    }
+    p {
+      font-size: 18px;
+    }
   }
 }
 
@@ -416,7 +461,7 @@ a {
 .block-grid {
   &.three-up {
     > li {
-      @media (max-width: 767px) {
+      @media only screen and (max-width: @screen-medium) {
         width: 98%;
       }
     }
@@ -432,7 +477,7 @@ a {
     }
 
     > li {
-      @media (max-width: 767px) {
+      @media only screen and (max-width: @screen-medium) {
         width: 98%;
       }
     }
@@ -498,6 +543,9 @@ a.stockbar-btn {
 
 form {
   margin-bottom: 0;
+  input, textarea, select {
+    max-width: 100%;
+  }
 }
 
 .field {
@@ -561,5 +609,13 @@ form {
   p {
     font-size: 17px;
     line-height: 1.5;
+  }
+  @media only screen and (max-width: @screen-medium) {
+    h2 {
+      font-size: 24px;
+    }
+    p {
+      font-size: 16px;
+    }
   }
 }
